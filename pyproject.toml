@@ -1,0 +1,21 @@
+[build-system]
+requires = ["setuptools"]
+build-backend = "setuptools.build_meta"
+
+[metadata]
+name = "pfs-mcdm"
+version = "0.1"
+authors = [
+  { name="Khaled Janada", email="khaledjanada@gmail.com" },
+]
+description = "Multi-Criteria Decision Making using Pythagorean Fuzzy Sets"
+readme = "README.md"
+license = { file="LICENSE" }
+requires-python = ">=3.9"
+
+classifiers = [
+    "Programming Language :: Python :: 3.9",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Topic :: Scientific/Engineering",
+]
