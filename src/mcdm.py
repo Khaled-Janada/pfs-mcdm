@@ -5,6 +5,8 @@ import pandas as pd
 
 from src.pfn import PFN
 
+pd.set_option('display.float_format', '{:.3f}'.format)
+
 
 def normalize(vector: List[float]):
     s = sum(vector)

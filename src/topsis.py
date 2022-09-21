@@ -24,13 +24,13 @@ def topsis(array: List[List[(float, float)]], weights: List[float],
         return s
 
     distances = matrix.apply(calc_dist, axis=1)
-    solution['D+'] = distances['D+'].round(4)
-    solution['D-'] = distances['D-'].round(4)
+    solution['D+'] = distances['D+']
+    solution['D-'] = distances['D-']
 
     d_n_max = distances['D-'].max()
     d_p_min = distances['D+'].min()
 
-    solution['Revised Closeness'] = pd.Series.combine(distances['D-'], distances['D+'], func=lambda n, p: (n / d_n_max) - (p / d_p_min)).round(4)
+    solution['Revised Closeness'] = pd.Series.combine(distances['D-'], distances['D+'], func=lambda n, p: (n / d_n_max) - (p / d_p_min))
     solution['Rank'] = solution['Revised Closeness'].rank(ascending=False).astype(int)
 
     return solution

@@ -1,10 +1,9 @@
 from __future__ import annotations
 
 from typing import List
-
 import pandas as pd
 
-from src import PFN
+from src.pfn import PFN
 from src.mcdm import prepare_data
 
 
@@ -17,10 +16,10 @@ def simple_aggregation(array: List[List[(float, float)]], weights: List[float],
     def agg_row(row: pd.Series) -> PFN:
         u_sum = sum([x.u * weights[i] for i, x in enumerate(row)])
         v_sum = sum([x.v * weights[i] for i, x in enumerate(row)])
-        return PFN(u_sum, v_sum).round(4)
+        return PFN(u_sum, v_sum)
 
     solution['Aggregated'] = matrix.apply(agg_row, axis=1)
-    solution['Score'] = solution['Aggregated'].apply(PFN.score).round(4)
+    solution['Score'] = solution['Aggregated'].apply(PFN.score)
     solution['Rank'] = solution['Score'].rank(ascending=False).astype(int)
 
     styler = solution.style

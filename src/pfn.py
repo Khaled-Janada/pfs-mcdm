@@ -8,8 +8,12 @@ class PFN(namedtuple('P', 'u v')):
     u: float
     v: float
 
+    def __new__(cls, u, v):
+        # noinspection PyArgumentList
+        return super().__new__(cls, round(u, 4), round(v, 4))
+
     def validate(self) -> bool:
-        return (self.u > 0) and (self.v > 0) and (self.u ** 2 + self.v ** 2 <= 1)
+        return (self.u >= 0) and (self.v >= 0) and (self.r <= 1)
 
     def score(self) -> float:
         return self.u ** 2 - self.v ** 2
@@ -19,6 +23,10 @@ class PFN(namedtuple('P', 'u v')):
 
     def round(self, digits: int) -> PFN:
         return PFN(round(self.u, digits), round(self.v, digits))
+
+    @property
+    def r(self) -> float:
+        return self.u ** 2 + self.v ** 2
 
     @property
     def pi(self) -> float:

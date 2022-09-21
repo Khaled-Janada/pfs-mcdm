@@ -1,16 +1,26 @@
-from src import topsis, simple_aggregation
+import pandas as pd
 
-t = [[(0.9, 0.3), (0.7, 0.6), (0.5, 0.8), (0.6, 0.3)],
-     [(0.4, 0.7), (0.9, 0.2), (0.8, 0.1), (0.5, 0.3)],
-     [(0.8, 0.4), (0.7, 0.5), (0.6, 0.2), (0.7, 0.4)],
-     [(0.7, 0.2), (0.8, 0.2), (0.8, 0.4), (0.6, 0.6)]]
+from src import topsis, simple_aggregation, promethee
 
-w = [0.15, 0.25, 0.35, 0.25]
+data = [[(0.9, 0.3), (0.7, 0.6), (0.5, 0.8), (0.6, 0.3)],
+        [(0.4, 0.7), (0.9, 0.2), (0.8, 0.1), (0.5, 0.3)],
+        [(0.8, 0.4), (0.7, 0.5), (0.6, 0.2), (0.7, 0.4)],
+        [(0.7, 0.2), (0.8, 0.2), (0.8, 0.4), (0.6, 0.6)]]
 
-agg = simple_aggregation(t, w, alternatives=['x1', 'x2', 'x3', 'x4'], criteria=['C1', 'C2', 'C3', 'C4'])
-print("Solution using simple aggregation")
-print(agg)
+weights = [0.15, 0.25, 0.35, 0.25]
 
-top = topsis(t, w, alternatives=['x1', 'x2', 'x3', 'x4'], criteria=['C1', 'C2', 'C3', 'C4'])
-print("\nSolution using TOPSIS")
-print(top)
+alternatives = ['UNI AIR', 'Transasia', 'Mandarin', 'Daily Air']
+criteria = ['Booking', 'Boarding', 'Cabin Service', 'Responsiveness']
+
+# agg = simple_aggregation(data, weights, alternatives=alternatives, criteria=criteria)
+# print("Solution using simple aggregation")
+# print(agg)
+#
+# top = topsis(data, weights, alternatives=alternatives, criteria=criteria)
+# print("\nSolution using TOPSIS")
+# print(top)
+
+prom = promethee(data, weights, alternatives=alternatives, criteria=criteria, q=0.1, p=0.8, preference_func='vshape')
+print(prom)
+
+
