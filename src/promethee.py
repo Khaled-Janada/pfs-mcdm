@@ -15,8 +15,8 @@ def pref_func_vshape(dist: float, q: float = 0, p: float = 0) -> float:
     return (dist - q) / (p - q)
 
 
-def pref_func_ushape(dist: float, p: float = 0) -> float:
-    if dist > p:
+def pref_func_ushape(dist: float, q: float = 0) -> float:
+    if dist > q:
         return 1
     return 0
 
@@ -29,7 +29,7 @@ def pref_func_level(dist: float, q: float = 0, p: float = 0) -> float:
     return 0.5
 
 
-def pref_func_gaussian(dist: float, s: float = 0) -> float:
+def pref_func_gaussian(dist: float, s: float = 0.5) -> float:
     if dist <= 0:
         return 1 - math.exp(-(dist ** 2) / s ** 2)
 
@@ -43,7 +43,7 @@ def promethee(array: List[List[(float, float)]], weights: List[float], preferenc
     functions: Dict[str, Callable[[float, ...], float]] = {'vshape': lambda x: pref_func_vshape(x, q, p),
                                                            'usual': pref_func_ushape,
                                                            'gaussian': lambda x: pref_func_gaussian(x, s),
-                                                           'ushape': lambda x: pref_func_ushape(x, p),
+                                                           'ushape': lambda x: pref_func_ushape(x, q),
                                                            'level': lambda x: pref_func_level(x, p)}
     pref_func = functions[preference_func]
 
