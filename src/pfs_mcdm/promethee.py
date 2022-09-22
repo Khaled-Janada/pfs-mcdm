@@ -1,10 +1,10 @@
 from __future__ import annotations
 
 import math
-from typing import List, Callable, Dict
+from typing import Iterable, Callable, Dict
 import pandas as pd
 
-from pfs_mcdm.mcdm import prepare_data
+from .mcdm import prepare_data
 
 
 def pref_func_vshape(dist: float, q: float = 0, p: float = 0) -> float:
@@ -34,17 +34,17 @@ def pref_func_gaussian(dist: float, s: float = 0.5) -> float:
         return 1 - math.exp(-(dist ** 2) / s ** 2)
 
 
-def promethee(array: List[List[(float, float)]], weights: List[float], preference_func: str = 'usual',
-              alternatives: List[str] | None = None, criteria: List[str] | None = None,
+def promethee(array: Iterable[Iterable[(float, float)]], weights_array: Iterable[float],
+              preference_func: str = 'usual', alternatives: Iterable[str] | None = None,
               q: float = 0, p: float = 0, s: float = 0) -> pd.DataFrame:
-    matrix = prepare_data(array, alternatives, criteria)
+    matrix, weights = prepare_data(array, weights_array, alternatives)
     solution = pd.DataFrame(index=matrix.index.values)
 
-    functions: Dict[str, Callable[[float, ...], float]] = {'vshape': lambda x: pref_func_vshape(x, q, p),
-                                                           'usual': pref_func_ushape,
-                                                           'gaussian': lambda x: pref_func_gaussian(x, s),
-                                                           'ushape': lambda x: pref_func_ushape(x, q),
-                                                           'level': lambda x: pref_func_level(x, p)}
+    functions: Dict[str, Callable[[float, ...], float]] = \
+        {'vshape': lambda x: pref_func_vshape(x, q, p), 'usual': pref_func_ushape,
+         'gaussian': lambda x: pref_func_gaussian(x, s), 'ushape': lambda x: pref_func_ushape(x, q),
+         'level': lambda x: pref_func_level(x, p)}
+
     pref_func = functions[preference_func]
 
     pref_matrix = pd.DataFrame(index=matrix.index.values, columns=matrix.index.values, dtype=float)
