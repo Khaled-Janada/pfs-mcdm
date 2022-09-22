@@ -8,6 +8,7 @@ version = "0.2"
 authors = [
   { name="Khaled Janada", email="khaledjanada@gmail.com" },
 ]
+
 description = "Multi-Criteria Decision Making using Pythagorean Fuzzy Sets"
 readme = "README.md"
 license = { file="LICENSE" }
@@ -19,3 +20,6 @@ classifiers = [
     "Operating System :: OS Independent",
     "Topic :: Scientific/Engineering",
 ]
+
+[project.urls]
+"Homepage" = "https://github.com/Khaled-Janada/pfs-mcdm"
