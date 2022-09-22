@@ -1,4 +1,10 @@
 # pfs-mcdm  
+
+[![Python](https://img.shields.io/badge/Python-3.9-blue)](https://www.python.org/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://opensource.org/licenses/MIT)
+
+[![ORCID](https://img.shields.io/badge/ORCID-0000--0002--6522--8482-green)](https://orcid.org/0000-0002-6522-8482)
+
   
 Python implementation of multi-criteria decision-making (MCDM) algorithms using pythagorean fuzzy sets (PFSs).  
   
@@ -60,6 +66,8 @@ The output solution is a pandas `DataFrame`
 
 #### Simple Aggregation:
 
+    from pfs-mcdm import simple_aggregation
+
     simple_aggregation_sol = simple_aggregation(matrix, weights, alternatives=alternatives)  
       
     print(simple_aggregation_sol)
@@ -76,6 +84,8 @@ The output solution is a pandas `DataFrame`
 </blockquote></blockquote>
 
 #### TOPSIS:
+
+    from pfs-mcdm import topsis
 
     topsis_sol = topsis(matrix, weights, alternatives=alternatives)  
        
@@ -95,6 +105,8 @@ The output solution is a pandas `DataFrame`
 #### PROMETHEE:
 The `promethee` function takes an optional argument `preference_func` to determine the preference function to be used. Available functions are `usual`, `ushape`, `vshape`, `level`, and `gaussian`; default is `usual`.  
 &nbsp; For `ushape` preference function, an additional argument `q` can be passed to determine the indifference threshold; default is zero. For `vshape` and `level` preference function, additional arguments `q` and `p` can be passed to determine the indifference and preference thresholds, respectively; default is zero. For the `gaussian` preference function, an additional argument `s` can be passed to determine the Gaussian threshold; default is 0.5.
+
+    from pfs-mcdm import promethee
 
     promethee_sol = promethee(matrix, weights, alternatives=alternatives, preference_func='vshape', q=0.1, p=0.8)  
       
