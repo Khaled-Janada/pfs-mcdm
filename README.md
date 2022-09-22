@@ -52,8 +52,8 @@ Optionally, the `aternatives` argument can be used to provide alternatives' name
   
 The output solution is a pandas `DataFrame`
 
-    import pfs-mcdm as pfs  
-      
+    from pfs_mcdm import simple_aggregation, topsis, promethee
+
     matrix = [ 
     [(0.9, 0.3), (0.7, 0.6), (0.5, 0.8), (0.6, 0.3)],
     [(0.4, 0.7), (0.9, 0.2), (0.8, 0.1), (0.5, 0.3)],  
@@ -66,13 +66,13 @@ The output solution is a pandas `DataFrame`
 
 #### Simple Aggregation:
 
-    from pfs-mcdm import simple_aggregation
-
     simple_aggregation_sol = simple_aggregation(matrix, weights, alternatives=alternatives)  
-      
+    
+    print("MCDM solution using simple aggregation:")  
     print(simple_aggregation_sol)
 
 <blockquote><blockquote>
+MCDM solution using simple aggregation:
 
 |           | Aggregated    | Score | Rank |
 |-----------|---------------|-------|------|
@@ -85,13 +85,13 @@ The output solution is a pandas `DataFrame`
 
 #### TOPSIS:
 
-    from pfs-mcdm import topsis
+    topsis_sol = topsis(matrix, weights, alternatives=alternatives)
 
-    topsis_sol = topsis(matrix, weights, alternatives=alternatives)  
-       
+    print("MCDM solution using TOPSIS:")
     print(topsis_sol)
 
 <blockquote><blockquote>
+MCDM solution using TOPSIS:
 
 |           | D+    | D-    | Revised Closeness | Rank |
 |-----------|-------|-------|-------------------|------|
@@ -106,11 +106,12 @@ The output solution is a pandas `DataFrame`
 The `promethee` function takes an optional argument `preference_func` to determine the preference function to be used. Available functions are `usual`, `ushape`, `vshape`, `level`, and `gaussian`; default is `usual`.  
 &nbsp; For `ushape` preference function, an additional argument `q` can be passed to determine the indifference threshold; default is zero. For `vshape` and `level` preference function, additional arguments `q` and `p` can be passed to determine the indifference and preference thresholds, respectively; default is zero. For the `gaussian` preference function, an additional argument `s` can be passed to determine the Gaussian threshold; default is 0.5.
 
-    from pfs-mcdm import promethee
-
     promethee_sol = promethee(matrix, weights, alternatives=alternatives, preference_func='vshape', q=0.1, p=0.8)  
-      
+    
+    MCDM solution using PROMETHEE:  
     print(promethee_sol)
+<blockquote><blockquote>
+MCDM solution using PROMETHEE:
 
 |           | Positive Outranking | Negative Outranking | Net Outranking | Rank |
 |-----------|---------------------|---------------------|----------------|------|
@@ -118,6 +119,7 @@ The `promethee` function takes an optional argument `preference_func` to determi
 | Transasia | 0.291               | 0.158               | 0.133          | 1    |
 | Mandarin  | 0.189               | 0.137               | 0.051          | 3    |
 | Daily Air | 0.250               | 0.084               | 0.167          | 2    |
+</blockquote></blockquote>
 
 # License  
 MIT
