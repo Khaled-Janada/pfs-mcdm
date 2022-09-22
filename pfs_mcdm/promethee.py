@@ -4,7 +4,7 @@ import math
 from typing import List, Callable, Dict
 import pandas as pd
 
-from src.mcdm import prepare_data
+from pfs_mcdm.mcdm import prepare_data
 
 
 def pref_func_vshape(dist: float, q: float = 0, p: float = 0) -> float:

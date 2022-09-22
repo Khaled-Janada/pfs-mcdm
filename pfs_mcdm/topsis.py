@@ -4,8 +4,8 @@ from typing import List
 
 import pandas as pd
 
-from src.pfn import PFN
-from src.mcdm import prepare_data
+from pfs_mcdm.pfn import PFN
+from pfs_mcdm.mcdm import prepare_data
 
 
 def topsis(array: List[List[(float, float)]], weights: List[float],

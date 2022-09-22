@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import List, Tuple
 import pandas as pd
 
-from src.pfn import PFN
+from pfs_mcdm.pfn import PFN
 
 pd.set_option('display.float_format', '{:.3f}'.format)
 
