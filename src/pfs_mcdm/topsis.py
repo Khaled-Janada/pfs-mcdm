@@ -1,17 +1,16 @@
 from __future__ import annotations
 
-from typing import List
+from typing import Iterable
 
 import pandas as pd
 
-from pfs_mcdm.pfn import PFN
-from pfs_mcdm.mcdm import prepare_data
+from .pfn import PFN
+from .mcdm import prepare_data
 
 
-def topsis(array: List[List[(float, float)]], weights: List[float],
-           alternatives: List[str] | None = None, criteria: List[str] | None = None) -> pd.DataFrame:
-    matrix = prepare_data(array, alternatives, criteria)
-
+def topsis(array: Iterable[Iterable[(float, float)]], weights_array: Iterable[float],
+           alternatives: Iterable[str] | None = None) -> pd.DataFrame:
+    matrix, weights = prepare_data(array, weights_array, alternatives)
     solution = pd.DataFrame(index=matrix.index.values)
 
     x_p = matrix.max(axis=0, numeric_only=False)
