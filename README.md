@@ -39,7 +39,7 @@ $ pip install pfs-mcdm
 ***
 ## How to use?  
   
-The decision matrix can be provided as a 2D array like of tuples. Each tuple represents a pythagorean fuzzy number ($\mu$, $\nu$). The weights of the  criteria are provided as an array like of floats. Weights are normalized to sum to 1. Optionally, alternatives names can be used.  
+The decision matrix can be provided as a 2D array like of tuples. Each tuple represents a pythagorean fuzzy number $(\mu, \nu)$. The weights of the  criteria are provided as an array like of floats. Weights are normalized to sum to 1. Optionally, alternatives names can be used.  
   
 The output solution is a pandas `DataFrame`
 
